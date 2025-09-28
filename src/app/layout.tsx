@@ -5,6 +5,8 @@ import { ThemeProvider } from "./components/theme-provider";
 import { ModeToggle } from "./components/common/ModeToggle";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/common/app-sidebar";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./utils/queryClient";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,24 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SidebarProvider>
-              <AppSidebar />
-              <SidebarTrigger />
-              <main className="mx-auto">
-                {children}
-              </main>
-            </SidebarProvider>
-          </ThemeProvider>
+       <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            {children}
+        </ThemeProvider>
       </body>
     </html>
   );
